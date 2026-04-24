@@ -32,6 +32,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('admin','Admin::index');
 $routes->get('Admin','Admin::index');
+$routes->get('admin/setting','Admin::Setting');
+$routes->get('Admin/Setting','Admin::Setting');
 
 
 

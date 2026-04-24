@@ -13,7 +13,7 @@ class Admin extends BaseController
         return view('v_template_back_end', $data);
     }
 
-    public function setting()
+    public function Setting()
     {
         $data = [
             'judul' => 'Setting',
