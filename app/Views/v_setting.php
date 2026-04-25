@@ -13,22 +13,21 @@
               <div class="card-body">
             <div
 
+                <?php echo form_open('Admin/UpdateSetting') ?>
 
-
-
-                <?php echo form_open() ?>
+                
 
                   <div class="row">
                     <div class="col-sm-7">
                         <div class="form-group">
                             <label >Nama Website</label>
-                            <input name= "nama_web" class="form-control" placeholder="Nama Website">
+                            <input name= "nama_web" value="<?= $web['nama_web'] ?>" class="form-control" placeholder="Nama Website">
                          </div>
                         </div>
                     <div class="col-sm-3    ">
                       <div class="form-group">
                          <label >Coordinat Wilayah</label>
-                         <input name= "coordinat_wilayah" class="form-control" placeholder="CoordinatWwilayah">
+                         <input name= "coordinat_wilayah" value="<?= $web['coordinat_wilayah'] ?>" class="form-control" placeholder="CoordinatWwilayah">
                      </div>
                     </div>
                       
@@ -36,7 +35,7 @@
                      <div class="col-sm-2">
                         <div class="form-group">
                             <label >Zoom View</label>
-                            <input type= "number" name= "coordinat_wilayah" min="0" max="20" class="form-control" placeholder="CoordinatWwilayah">
+                            <input type= "number" value="<?= $web['zoom_view'] ?>" name= "coordinat_wilayah" min="0" max="20" class="form-control" placeholder="CoordinatWwilayah">
                         </div>
                      </div>
                    </div>
@@ -91,16 +90,11 @@ var peta4 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
 		id: 'mapbox/dark-v10'
 	}); 
 
-   // var map = L.map('map').setView([-7.244352002019807, 108.97745250919617], 12);
-
-	//var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-
-		//attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	//}).addTo(map);
+   
 
     var map = L.map('map', {
-	center: [-7.244352002019807, 108.97745250919617],
-	zoom: 12,
+	center: [<?= $web['coordinat_wilayah'] ?>],
+	zoom: <?= $web['zoom_view'] ?>,
 	layers: [peta3]
     });
 
