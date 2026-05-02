@@ -34,7 +34,9 @@ $routes->get('admin','Admin::index');
 $routes->get('Admin','Admin::index');
 $routes->get('admin/setting','Admin::Setting');
 $routes->get('Admin/Setting','Admin::Setting');
-$routes->post('Admin/IpdateSetting','Admin::UpdateSetiing');
+$routes->post('Admin/UpdateSetting','Admin::UpdateSetting');
+$routes->post('admin/updatesetting','Admin::UpdateSetting');
+$routes->post('admin/updatesetting', 'Admin::updatesetting');
 
 
 
