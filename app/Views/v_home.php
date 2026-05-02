@@ -32,7 +32,7 @@ var peta4 = L.tileLayer(
 var map = L.map('map').setView([-7.244352002019807, 108.97745250919617], 12);
 
 // DEFAULT (WAJIB pakai ini)
-peta1.addTo(map);
+peta2.addTo(map);
 
 // CONTROL
 var baseMaps = {
