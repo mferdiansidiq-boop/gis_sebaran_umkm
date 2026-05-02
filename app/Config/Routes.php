@@ -37,6 +37,8 @@ $routes->get('Admin/Setting','Admin::Setting');
 $routes->post('Admin/UpdateSetting','Admin::UpdateSetting');
 $routes->post('admin/updatesetting','Admin::UpdateSetting');
 $routes->post('admin/updatesetting', 'Admin::updatesetting');
+$routes->get('wilayah', 'Wilayah::index');
+$routes->get('Wilayah', 'Wilayah::index');
 
 
 
