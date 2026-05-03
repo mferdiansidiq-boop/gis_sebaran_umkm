@@ -39,7 +39,15 @@ $routes->post('admin/updatesetting','Admin::UpdateSetting');
 $routes->post('admin/updatesetting', 'Admin::updatesetting');
 $routes->get('wilayah', 'Wilayah::index');
 $routes->get('Wilayah', 'Wilayah::index');
-
+$routes->get('Wilayah/Input', 'Wilayah::Input');
+$routes->get('wilayah/input', 'Wilayah::Input');
+$routes->get('wilayah/input', 'Wilayah::input');
+$routes->get('wilayah/input', 'wilayah::input');
+$routes->post('wilayah/proses-simpan', 'Wilayah::InsertData');
+$routes->post('wilayah/proses-simpan', 'Wilayah::insertData');
+$routes->post('wilayah/InsertData', 'Wilayah::InsertData');
+$routes->post('wilayah/insert-data', 'Wilayah::InsertData');
+$routes->post('wilayah/simpan', 'Wilayah::InsertData');
 
 
 /*

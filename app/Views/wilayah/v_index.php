@@ -7,8 +7,9 @@
                 <h3 class="card-title"><?= $judul ?></h3>
 
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
+                  <a href=" <?= base_url('Wilayah/Input') ?>" class="btn btn-flat btn-primary btm-sm ">
+                    <i class="fas fa-plus"></i> Tambah
+                  </a>
                   </button>
                 </div>
                 <!-- /.card-tools -->
@@ -16,6 +17,18 @@
               <!-- /.card-header -->
               <div class="card-body">
               
+              <?php 
+               if (session()->getFlashdata('insert')) {
+          echo '<div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i>';
+          echo session()->getFlashdata('insert');
+          echo '</h5></div>';
+        }
+              
+              
+              ?>
+
               <table id="example2" class="table table-bordered table-striped">
                 <thead>
                     <tr class="text-center">
