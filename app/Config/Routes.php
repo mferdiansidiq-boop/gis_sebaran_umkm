@@ -15,6 +15,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
+
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
@@ -48,6 +49,12 @@ $routes->post('wilayah/proses-simpan', 'Wilayah::insertData');
 $routes->post('wilayah/InsertData', 'Wilayah::InsertData');
 $routes->post('wilayah/insert-data', 'Wilayah::InsertData');
 $routes->post('wilayah/simpan', 'Wilayah::InsertData');
+$routes->get('wilayah/Edit/(:num)', 'Wilayah::Edit/$1');
+$routes->get('Wilayah/Edit/(:num)', 'Wilayah::Edit/$1');
+$routes->post('wilayah/UpdateData/(:any)', 'Wilayah::UpdateData/$1');
+$routes->post('Wilayah/UpdateData/(:any)', 'Wilayah::UpdateData/$1');
+$routes->get('wilayah/Delete/(:num)', 'Wilayah::Delete/$1');
+$routes->get('Wilayah/Delete/(:num)', 'Wilayah::Delete/$1');
 
 
 /*
