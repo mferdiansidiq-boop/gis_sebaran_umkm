@@ -19,6 +19,7 @@ public function __construct()
 
         $data = [
             'judul' => 'Dashboard',
+            'menu' => 'dashboad',
             'page' => 'v_dashboard',
         ];
         return view('v_template_back_end', $data);
@@ -32,6 +33,7 @@ public function __construct()
 
         $data = [
             'judul' => 'Setting',
+            'menu' => 'setting',
             'page' => 'v_setting',
             'web' => $this->ModelSetting->Dataweb(),
         ];
