@@ -1,7 +1,3 @@
-<?php /** @var string $judul */ ?>
-<?php /** @var array $wilayah */ ?>
-<?php /** @var string $page */ ?>
- <?php /** @var array $menu */ ?>
 
 <!DOCTYPE html>
 <!--
