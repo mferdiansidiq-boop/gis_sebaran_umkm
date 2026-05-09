@@ -19,7 +19,7 @@ public function __construct()
 
         $data = [
             'judul' => 'Dashboard',
-            'menu' => 'dashboad',
+            'menu' => 'dashboard',
             'page' => 'v_dashboard',
         ];
         return view('v_template_back_end', $data);
