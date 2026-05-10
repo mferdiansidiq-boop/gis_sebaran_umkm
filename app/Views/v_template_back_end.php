@@ -149,16 +149,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
-            <a href="<?= base_url('skala-umkm') ?>" class="nav-link <?=  $menu == 'skala-umkm' ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-layer-group"></i>
+            <a href="<?= base_url('skala-usaha') ?>" class="nav-link <?=  $menu == 'skalausaha' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-chart-line"></i>
               <p>
-                Skala_umkm
+                Skala_usaha
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="<?= base_url('umkm') ?>" class="nav-link <?=  $menu == 'umkm' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-store"></i>
+              <p>
+                Umkm
               </p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="<?= base_url('User') ?>" class="nav-link">
+            <a href="<?= base_url('User') ?>" class="nav-link <?=  $menu == 'user' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User
@@ -168,7 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
           <li class="nav-item">
-            <a href="<?= base_url('Admin/Setting') ?>" class="nav-link">
+            <a href="<?= base_url('Admin/Setting') ?>" class="nav-link <?=  $menu == 'setting' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
                 Setting
