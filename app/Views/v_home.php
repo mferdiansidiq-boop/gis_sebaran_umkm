@@ -1,3 +1,6 @@
+ <?php /** @var array $wilayah */ ?>
+  <?php /** @var array $web */ ?>
+
 <div id="map" style="width: 100%; height: 620px;"></div>
 
 <script>
@@ -29,7 +32,7 @@ var peta4 = L.tileLayer(
 );
 
 // INIT MAP
-var map = L.map('map').setView([-7.244352002019807, 108.97745250919617], 12);
+var map = L.map('map').setView([<?=  $web['coordinat_wilayah'] ?>], <?=  $web['zoom_view'] ?>);
 
 // DEFAULT (WAJIB pakai ini)
 peta2.addTo(map);
@@ -42,6 +45,18 @@ var baseMaps = {
   "Night": peta4
 };
 
+
 L.control.layers(baseMaps).addTo(map);
+
+<?php foreach ($wilayah as $key => $value) { ?>
+  L.geoJSON(<?= $value['geojson'] ?>, {
+    fillColor: '<?= $value['warna'] ?>',
+    fillOpacity: 0.5,
+  })
+  .bindPopup("<b><?= $value['nama_wilayah'] ?></b>")
+  .addTo(map);
+ <?php } ?>
+
+</script> 
 
 </script>
