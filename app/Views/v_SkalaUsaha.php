@@ -62,7 +62,7 @@
                         <td class="text-center"><?= $value['skala_usaha'] ?></td>
                         <td class="text-center"><img src="<?= base_url('marker/' . $value['marker']) ?>" width="75px"></td>
                         <td class="text-center">
-                          <button class="btn btn-sm btn-warning btn-flat"><i class="fas fa-map-marker-alt"> Ganti Marker</i></button>
+                          <button data-toggle="modal" data-target="#edit<?= $value['id_skala'] ?>" class="btn btn-sm btn-warning btn-flat"><i class="fas fa-map-marker-alt"> Ganti Marker</i></button>
                         </td>
                      </tr>
                   <?php } ?>
@@ -76,4 +76,41 @@
             </div>
             <!-- /.card -->
           </div>
+          
+
+
+        <?php foreach ($skalausaha as $key => $value) { ?>
+                    ?>  
+          <div class="modal fade" id="edit<?= $value['id_skala'] ?>">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Ganti Marker <?= $value['skala_usaha'] ?></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <?php echo form_open_multipart('Skalausaha/UpdateData/' . $value['id_skala']) ?>
+            <div class="modal-body">
+              
+            <div class="form-group">
+              <label>Upload Marker</label>
+              <input type="file" name="marker" class="form-control" accept="image/png" required>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="Submit" class="btn btn-primary">Simpan</button>
+            </div>
+
+            <?php echo form_close() ?>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+      <?php } ?>
+
+
 

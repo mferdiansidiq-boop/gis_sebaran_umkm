@@ -22,4 +22,18 @@ class SkalaUsaha extends BaseController
         ];
         return view('v_template_back_end', $data);
     }
+
+    public function UpdateData($id_skala) 
+    {
+        $marker = $this->request->getFile('marker');
+        $name_file = $marker->getRandomName();
+        $data = [
+            'id_skala'=> $id_skala,
+            'marker' => $name_file,
+            ];
+            $marker->move('marker', $name_file);
+            $this->ModelSkalausaha->UpdateData($data);
+            session()->setFlashdata('update','Marker Berhasil Update!!');
+            return redirect()->to('skala-usaha');
+    }
 }

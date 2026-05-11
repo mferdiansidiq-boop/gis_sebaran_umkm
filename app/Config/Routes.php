@@ -16,6 +16,8 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(true);
 $routes->set404Override();
 
+
+
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
@@ -64,7 +66,10 @@ $routes->get('UMKM', 'Umkm::index');
 //Skala Usaha
 $routes->get('Skala-Usaha', 'SkalaUsaha::index');
 $routes->get('skala-usaha', 'SkalaUsaha::index');
-
+//Skala/UpdateData
+$routes->add('Skalausaha/UpdateData/(:num)', 'Skalausaha::UpdateData/$1');
+$routes->post('Skala-usaha/UpdateData/(:num)', 'Skalausaha::UpdateData/$1');
+$routes->get('Skala-usaha', 'Skalausaha::index');
 
 
 
