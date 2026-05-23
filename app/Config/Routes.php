@@ -70,6 +70,11 @@ $routes->get('skala-usaha', 'SkalaUsaha::index');
 $routes->add('Skalausaha/UpdateData/(:num)', 'Skalausaha::UpdateData/$1');
 $routes->post('Skala-usaha/UpdateData/(:num)', 'Skalausaha::UpdateData/$1');
 $routes->get('Skala-usaha', 'Skalausaha::index');
+//Input Umpm
+$routes->get('umkm/input', 'Umkm::Input');
+$routes->post('umkm/input', 'Umkm::input');
+$routes->get('Umkm/Input', 'Umkm::Input');
+
 
 
 

@@ -55,6 +55,7 @@
                     <th>Status</th>
                     <th>Skala Usaha</th>
                     <th>Alamat</th>
+                    <th>Foto</th>
                     <th width="150px">Aksi</th>
                     </tr>
                 </thead>
@@ -67,6 +68,7 @@
                         <td class="text-center"><?= $value['status'] ?></td>
                         <td class="text-center"><?= $value['skala_usaha'] ?></td>
                         <td><?= $value['alamat'] ?></td>
+                        <td class="text-center"><img src="<?= base_url('foto/' . $value['foto']) ?>" width="150px"height="100px"></td>
                         <td class="text-center">
                           <a href="<?= base_url('Umkm/Edit/' . $value['id_umkm']) ?>" class="btn btn-xs btn-success btn-flat"><i class="fas fa-eye"></i></a>
                           <a href="<?= base_url('Umkm/Edit/' . $value['id_umkm']) ?>" class="btn btn-xs btn-warning btn-flat"><i class="fas fa-pencil-alt"></i></a>

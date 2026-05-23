@@ -32,6 +32,16 @@ class UMKM extends BaseController
         return view('v_template_back_end', $data);
     }
 
-     
+      public function Input()
+    {
+        $data = [
+            'judul' => 'Input Umkm',
+            'menu' => 'umkm',
+            'page' => 'umkm/v_input',
+             'web' => $this->ModelSetting->Dataweb(),
+            'wilayah' => $this->ModelWilayah->AllData(),
+        ];
+        return view('v_template_back_end', $data);
+    }
 
 }
