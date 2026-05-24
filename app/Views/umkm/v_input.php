@@ -58,7 +58,7 @@
               <div class="form-group">
                 <label>Coordinat Umkm</label>
                 <div id="map" style="width: 100%; height: 420px;"></div>
-                <input name="coordinat" value="<?= old('coordinat') ?>" placeholder="Coordinat Umkm" class="form-control" readonly>
+                <input name="coordinat" id="Coordinat" value="<?= old('coordinat') ?>" placeholder="Coordinat Umkm" class="form-control" readonly>
                 <p class="text-danger"><?= $validation->hasError('coordinat') ? $validation->getError('coordinat'):''?></p>
                 </div>
 
@@ -172,8 +172,37 @@ var baseMaps = {
 };
 
 
-L.control.layers(baseMaps).addTo(map);
+var layerControl = L.control.layers(baseMaps).addTo(map);
 
+var coordinatInput = document.querySelector("[name=coordinat]");
 
+var curLocation = [<?=  $web['coordinat_wilayah'] ?>];
+map.attributionControl.setPrefix(false);
+var marker = new L.marker(curLocation, {
+  draggable: 'true',
+});
+
+//mengambil coordinat saat marker di geser
+marker.on('dragend',function(e) {
+  var position = marker.getLatLng();
+  marker.setLatLng(position, {
+    curLocation
+  }).bindPopup(position).update();
+  $("#Coordinat").val(position.lat + "," + position.lng);
+});
+
+//mengambil coordinat saat map onclik
+map.on("click", function(e) {
+  var lat = e.latlng.lat;
+  var lng = e.latlng.lng;
+  if (!marker) {
+  marker = L.marker(e.latlng).addTo(map);
+} else {
+  marker.setLatLng(e.latlng);
+}
+coordinatInput.value = lat + ',' + lng;
+});
+
+map.addLayer(marker);
 
 </script> 
