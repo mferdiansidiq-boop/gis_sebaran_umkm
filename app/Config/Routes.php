@@ -74,6 +74,14 @@ $routes->get('Skala-usaha', 'Skalausaha::index');
 $routes->get('umkm/input', 'Umkm::Input');
 $routes->post('umkm/input', 'Umkm::input');
 $routes->get('Umkm/Input', 'Umkm::Input');
+//Route AJAX Kabupaten
+$routes->post('Umkm/Kabupaten', 'Umkm::Kabupaten');
+$routes->get('Umkm/Kabupaten', 'Umkm::Kabupaten');
+$routes->get('umkm/kabupaten', 'Umkm::Kabupaten');
+//Route AJAX Kecamatan
+$routes->post('Umkm/Kecamatan', 'Umkm::Kecamatan');
+$routes->get('Umkm/Kecamatan', 'Umkm::Kecamatan');
+$routes->get('umkm/kecamatan', 'Umkm::Kecamatan');
 
 
 

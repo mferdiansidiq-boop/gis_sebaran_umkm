@@ -1,7 +1,6 @@
 <?php /** @var string $judul */ ?>
  <?php /** @var array $wilayah */ ?>
-
- <?php /** @var array $wilayah */ ?>
+ <?php /** @var array $provinsi */ ?>
   <?php /** @var array $web */ ?>
 
  
@@ -66,7 +65,11 @@
                   <div class="col-sm-4">
                 <div class="form-group">
                 <label>Provinsi</label>
-                <select name="id_provinsi" class="form-control">
+                <select name="id_provinsi" id="id_provinsi" class="form-control select2" style="width: 100%;">
+                  <option value="">--Pilih Provinsi--</option>
+                  <?php foreach ($provinsi as $key => $value) { ?>
+                  <option value="<?=  $value['id_provinsi'] ?>"><?=  $value['nama_provinsi'] ?></option>
+                <?php } ?>
                 </select>
                 <p class="text-danger"><?= $validation->hasError('id_provinsi') ? $validation->getError('id_provinsi'):''?></p>
                 </div>
@@ -76,7 +79,7 @@
                   <div class="col-sm-4">
                 <div class="form-group">
                 <label>Kabupaten</label>
-                <select name="id_kabupaten" class="form-control">
+                <select name="id_kabupaten" id="id_kabupaten" class="form-control select2">
                 </select>
                 <p class="text-danger"><?= $validation->hasError('id_kabupaten') ? $validation->getError('id_kabupaten'):''?></p>
                 </div>
@@ -86,9 +89,9 @@
                   <div class="col-sm-4">
                 <div class="form-group">
                 <label>Kecamatan</label>
-                <select name="id_kecamatan" class="form-control">
+                <select name="id_kecamatan" id="id_kecamatan" class="form-control select2">
                 </select>
-                <p class="text-danger"><?= $validation->hasError('"id_kecamatan') ? $validation->getError('"id_kecamatan'):''?></p>
+                <p class="text-danger"><?= $validation->hasError('id_kecamatan') ? $validation->getError('id_kecamatan'):''?></p>
                 </div>
                </div>
                 </div>
@@ -106,6 +109,10 @@
                 <div class="form-group">
                 <label>Wilayah Administrasi</label>
                 <select name="id_wilayah" class="form-control">
+                   <option value="">--Pilih Wilayah Administrasi--</option>
+                  <?php foreach ($wilayah as $key => $value) { ?>
+                  <option value="<?=  $value['id_wilayah'] ?>"><?=  $value['nama_wilayah'] ?></option>
+                <?php } ?>
                 </select>
                 <p class="text-danger"><?= $validation->hasError('id_wilayah') ? $validation->getError('id_wilayah'):''?></p>
                 </div>
@@ -127,6 +134,42 @@
               </div>
            </div>
          </div>
+
+         <script>
+          $(document).ready(function() {
+            //Initialize Select2 Elements
+          $('.select2').select2();
+
+          $('#id_provinsi').change(function() {
+            var id_provinsi = $('#id_provinsi').val();
+          $.ajax({
+            type: "POST",
+            url: "<?= base_url('Umkm/Kabupaten') ?>",
+            data: {
+              id_provinsi: id_provinsi
+            },
+            success: function(response) {
+              $('#id_kabupaten').html(response);
+            }
+          });
+          });
+
+           $('#id_kabupaten').change(function() {
+            var id_kabupaten = $('#id_kabupaten').val();
+          $.ajax({
+            type: "POST",
+            url: "<?= base_url('Umkm/Kecamatan') ?>",
+            data: {
+              id_kabupaten: id_kabupaten
+            },
+            success: function(response) {
+              $('#id_kecamatan').html(response);
+            }
+          });
+          });
+
+           });
+            </script>
 
 
          <script>
