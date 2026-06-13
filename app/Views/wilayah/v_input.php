@@ -17,8 +17,12 @@
               <?php 
               session();
               $validation = \Config\Services::validation();
+
+              if (session()->getFlashdata('validation')) {
+                $validation = session()->getFlashdata('validation');
+              }
               ?>
-              <?php echo form_open('wilayah/simpan') ?>
+              <?php echo form_open('wilayah/InsertData') ?>
 
               <div class="row">
                 <div class="col-sm-6">

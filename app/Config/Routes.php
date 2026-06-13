@@ -83,6 +83,11 @@ $routes->post('Umkm/Kecamatan', 'Umkm::Kecamatan');
 $routes->get('Umkm/Kecamatan', 'Umkm::Kecamatan');
 $routes->get('umkm/kecamatan', 'Umkm::Kecamatan');
 
+$routes->post('umkm/insertdata', 'Umkm::InsertData');
+$routes->post('Umkm/InsertData', 'Umkm::InsertData');
+$routes->get('umkm', 'Umkm::Index');
+$routes->get('Umkm', 'Umkm::Index');
+
 
 
 

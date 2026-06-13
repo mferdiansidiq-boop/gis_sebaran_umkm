@@ -42,9 +42,6 @@ class Wilayah extends BaseController
 
     public function InsertData()
     {
-
-    
-
    if ($this->validate([
     'nama_wilayah' => [
         'label' =>'Nama Wilayah',
@@ -83,7 +80,7 @@ class Wilayah extends BaseController
          //jika validasi gagal
         
         session()->setFlashdata('errors',\Config\Services::validation()->geterrors());
-        return redirect()->to('Wilayah/Input')->withInput('validations',\Config\Services::validation());
+        return redirect()->to('Wilayah/Input')->withInput()->with('validation',\Config\Services::validation());
 
      }
     

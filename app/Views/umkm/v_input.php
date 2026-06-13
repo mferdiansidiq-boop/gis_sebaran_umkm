@@ -17,11 +17,14 @@
               <?php 
               session();
               $validation = \Config\Services::validation();
+              if (session()->getFlashdata('validation')) {
+                $validation = session()->getFlashdata('validation');
+              }
               ?>
-              <?php echo form_open_multipart('Umkm/InserData') ?>
+              <?php echo form_open_multipart('Umkm/InsertData') ?>
 
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-5">
               <div class="form-group">
                 <label>Nama Umkm</label>
                 <input name="nama_umkm" value="<?= old('nama_umkm') ?>" placeholder="Nama Umkm" class="form-control">
@@ -38,7 +41,7 @@
                </div>
   
 
-              <div class="col-sm-4">
+              <div class="col-sm-2">
                 <div class="form-group">
                 <label>Status</label>
                 <select name="status" class="form-control">
@@ -49,7 +52,18 @@
                   <option value="Commanditaire Vennootschap (CV)">Commanditaire Vennootschap (CV)</option>
                   <option value="Koperasi">Koperasi</option>
                 </select>
-                <p class="text-danger"><?= $validation->hasError('skala_usaha') ? $validation->getError('skala_usaha'):''?></p>
+                <p class="text-danger"><?= $validation->hasError('status') ? $validation->getError('status'):''?></p>
+                </div>
+               </div>
+
+               <div class="col-sm-3">
+                <div class="form-group">
+                <label>Kategori UMKM</label>
+                <select name="status" class="form-control">
+                  <option value="">--Pilih Kategori UMKM--</option>
+                  <option value="Perorangan">Perorangan</option>
+                </select>
+                <p class="text-danger"><?= $validation->hasError('id_kategori_umkm') ? $validation->getError('id_kategori_umkm'):''?></p>
                 </div>
                </div>
               </div>
@@ -121,8 +135,8 @@
 
             <div class="form-group">
                 <label>Foto Umkm</label>
-                <input type="file" accept=".jpg" name="foto" value="<?= old('foto') ?>" class="form-control">
-                <p class="text-danger"><?= $validation->hasError('alamat') ? $validation->getError('alamat'):''?></p>
+                <input type="file" accept=".jpg" name="foto" class="form-control" required>
+                <p class="text-danger"><?= $validation->hasError('foto') ? $validation->getError('foto'):''?></p>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-flat">Simpan</button>
