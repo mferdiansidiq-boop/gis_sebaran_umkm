@@ -140,7 +140,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-flat">Simpan</button>
-                <a href="<?= base_url('Wilayah') ?>" type="submit" class="btn btn-success btn-flat">Kembali</a>
+                <a href="<?= base_url('Umkm') ?>" type="submit" class="btn btn-success btn-flat">Kembali</a>
 
 
               <?php echo form_close() ?>

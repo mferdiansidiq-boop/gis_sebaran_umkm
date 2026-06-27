@@ -88,6 +88,13 @@ $routes->post('Umkm/InsertData', 'Umkm::InsertData');
 $routes->get('umkm', 'Umkm::Index');
 $routes->get('Umkm', 'Umkm::Index');
 
+$routes->get('umkm/edit/(:num)', 'Umkm::Edit/$1');
+$routes->get('Umkm/Edit/(:num)', 'Umkm::Edit/$1');
+$routes->post('umkm/updatedata/(:num)', 'Umkm::UpdateData/$1');
+$routes->post('Umkm/UpdateData/(:num)', 'Umkm::UpdateData/$1');
+$routes->get('umkm/delete/(:num)', 'Umkm::Delete/$1');
+$routes->get('Umkm/Delete/(:num)', 'Umkm::Delete/$1');
+
 
 
 
