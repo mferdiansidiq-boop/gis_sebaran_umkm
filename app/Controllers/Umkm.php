@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\ModelSkalausaha;
 use App\Controllers\BaseController;
 use App\Models\ModelUmkm;
 use App\Models\ModelWilayah;
 use App\Models\ModelSetting;
+
 use CodeIgniter\HTTP\ResponseInterface;
 
 class UMKM extends BaseController
@@ -13,6 +14,7 @@ class UMKM extends BaseController
     protected $ModelWilayah;
     protected $ModelSetting;
     protected $ModelUmkm;
+    protected $ModelSkalausaha;
 
     public function __construct() 
     {
@@ -151,6 +153,22 @@ public function InsertData()
             session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
             return redirect()->to('Umkm/Input')->withInput();
         }
+    }
+
+
+       public function Edit($id_umkm)
+     {
+        $data = [
+            'judul'    => 'Edit Umkm',
+            'menu'     => 'umkm',
+            'page'     => 'umkm/v_edit',
+            'web'      => $this->ModelSetting->Dataweb(),
+            'provinsi' => $this->ModelUmkm->allProvinsi(),
+            'wilayah'  => $this->ModelWilayah->AllData(),
+            'skala_usaha' => $this->ModelSkalausaha->AllData(),
+            'umkm' => $this->ModelUmkm->AllData($id_umkm),
+        ];
+        return view('v_template_back_end', $data);
     }
 
     //kabupaten

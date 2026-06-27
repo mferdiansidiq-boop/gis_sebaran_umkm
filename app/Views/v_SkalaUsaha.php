@@ -62,7 +62,7 @@
                         <td class="text-center"><?= $value['skala_usaha'] ?></td>
                         <td class="text-center"><img src="<?= base_url('marker/' . $value['marker']) ?>" width="75px"></td>
                         <td class="text-center">
-                          <button data-toggle="modal" data-target="#edit<?= $value['id_skala'] ?>" class="btn btn-sm btn-warning btn-flat"><i class="fas fa-map-marker-alt"> Ganti Marker</i></button>
+                          <button data-toggle="modal" data-target="#edit<?= $value['id_skala_usaha'] ?>" class="btn btn-sm btn-warning btn-flat"><i class="fas fa-map-marker-alt"> Ganti Marker</i></button>
                         </td>
                      </tr>
                   <?php } ?>
@@ -81,7 +81,7 @@
 
         <?php foreach ($skalausaha as $key => $value) { ?>
                     ?>  
-          <div class="modal fade" id="edit<?= $value['id_skala'] ?>">
+          <div class="modal fade" id="edit<?= $value['id_skala_usaha'] ?>">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -90,7 +90,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <?php echo form_open_multipart('Skalausaha/UpdateData/' . $value['id_skala']) ?>
+            <?php echo form_open_multipart('Skalausaha/UpdateData/' . $value['id_skala_usaha']) ?>
             <div class="modal-body">
               
             <div class="form-group">

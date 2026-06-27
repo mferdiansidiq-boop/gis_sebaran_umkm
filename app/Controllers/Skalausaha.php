@@ -23,12 +23,12 @@ class SkalaUsaha extends BaseController
         return view('v_template_back_end', $data);
     }
 
-    public function UpdateData($id_skala) 
+    public function UpdateData($id_skala_usaha) 
     {
         $marker = $this->request->getFile('marker');
         $name_file = $marker->getRandomName();
         $data = [
-            'id_skala'=> $id_skala,
+            'id_skala_usaha'=> $id_skala_usaha,
             'marker' => $name_file,
             ];
             $marker->move('marker', $name_file);

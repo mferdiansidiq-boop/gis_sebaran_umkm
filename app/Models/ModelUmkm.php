@@ -7,10 +7,11 @@ use CodeIgniter\Model;
 class ModelUmkm extends Model
 {
    public function AllData()
-   {
-       return $this->db->table('tbl_umkm')
-       ->get()->getResultArray();
-   }
+{
+    return $this->db->table('tbl_umkm')
+    ->join('tbl_skala_usaha', 'tbl_skala_usaha.id_skala_usaha = tbl_umkm.skala_usaha', 'left')
+    ->get()->getResultArray();
+}
 
    public function InsertData($data)
    {
@@ -18,11 +19,12 @@ class ModelUmkm extends Model
    }
 
    public function DetailData($id_umkm)
-   {
-       return $this->db->table('tbl_umkm')
-       ->where('id_umkm',$id_umkm)
-       ->get()->getRowArray();
-   }
+{
+    return $this->db->table('tbl_umkm')
+    ->join('tbl_skala_usaha', 'tbl_skala_usaha.id_skala_usaha = tbl_umkm.skala_usaha', 'left')
+    ->where('id_umkm', $id_umkm)
+    ->get()->getRowArray();
+}
 
    public function UpdateData($data)
    {
