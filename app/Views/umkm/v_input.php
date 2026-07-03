@@ -3,6 +3,7 @@
 <?php /** @var array $provinsi */ ?>
 <?php /** @var array $web */ ?>
 <?php /** @var array $kategori_umkm*/ ?>
+<?php /** @var array $skala_usaha*/ ?>
 
 <div class="col-md-12">
     <div class="card card-outline card-primary">
