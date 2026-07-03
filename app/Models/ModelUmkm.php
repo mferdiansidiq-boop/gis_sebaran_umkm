@@ -6,16 +6,16 @@ use CodeIgniter\Model;
 
 class ModelUmkm extends Model
 {
-   public function AllData()
+    public function AllData()
     {
         return $this->db->table('tbl_umkm')
-            // Join skala usaha (Sudah Benar)
+            // PERBAIKAN: Beri alias 'as nama_skala' supaya tidak menimpa kolom tbl_umkm.skala_usaha
+            ->select('tbl_umkm.*, tbl_skala_usaha.skala_usaha as nama_skala, tbl_kategori_umkm.nama_kategori_umkm')
+            
+            // Join skala usaha
             ->join('tbl_skala_usaha', 'tbl_skala_usaha.id_skala_usaha = tbl_umkm.skala_usaha', 'left')
             
-            // PERBAIKAN: Mengambil tbl_kategori_umkm.nama_kategori_umkm
-            ->select('tbl_umkm.*, tbl_skala_usaha.skala_usaha, tbl_kategori_umkm.nama_kategori_umkm')
-            
-            // PERBAIKAN: Mengubah kunci join menjadi id_kategori_umkm sesuai isi database
+            // Join kategori umkm
             ->join('tbl_kategori_umkm', 'tbl_kategori_umkm.id_kategori_umkm = tbl_umkm.id_kategori_umkm', 'left')
             ->get()->getResultArray();
     }
@@ -28,11 +28,9 @@ class ModelUmkm extends Model
     public function DetailData($id_umkm)
     {
         return $this->db->table('tbl_umkm')
-            // PERBAIKAN: Mengambil tbl_kategori_umkm.nama_kategori_umkm
-            ->select('tbl_umkm.*, tbl_skala_usaha.skala_usaha, tbl_kategori_umkm.nama_kategori_umkm, tbl_kabupaten.nama_kabupaten, tbl_kecamatan.nama_kecamatan')
+            // PERBAIKAN: Beri alias 'as nama_skala' supaya tidak menimpa kolom tbl_umkm.skala_usaha
+            ->select('tbl_umkm.*, tbl_skala_usaha.skala_usaha as nama_skala, tbl_kategori_umkm.nama_kategori_umkm, tbl_kabupaten.nama_kabupaten, tbl_kecamatan.nama_kecamatan')
             ->join('tbl_skala_usaha', 'tbl_skala_usaha.id_skala_usaha = tbl_umkm.skala_usaha', 'left')
-            
-            // PERBAIKAN: Mengubah kunci join menjadi id_kategori_umkm sesuai isi database
             ->join('tbl_kategori_umkm', 'tbl_kategori_umkm.id_kategori_umkm = tbl_umkm.id_kategori_umkm', 'left')
             ->join('tbl_kabupaten', 'tbl_kabupaten.id_kabupaten = tbl_umkm.id_kabupaten', 'left')
             ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_umkm.id_kecamatan', 'left')

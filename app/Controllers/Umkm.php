@@ -26,7 +26,6 @@ class UMKM extends BaseController
         $this->ModelUmkm = new ModelUmkm();
         $this->ModelSkalausaha = new ModelSkalausaha();
         $this->ModelKategoriumkm = new ModelKategoriumkm();
-        
     }
     
     public function index()
@@ -43,12 +42,13 @@ class UMKM extends BaseController
     public function Input()
     {
         $data = [
-            'judul'    => 'Input Umkm',
-            'menu'     => 'umkm',
-            'page'     => 'umkm/v_input',
-            'web'      => $this->ModelSetting->Dataweb(),
-            'provinsi' => $this->ModelUmkm->allProvinsi(),
-            'wilayah'  => $this->ModelWilayah->AllData(),
+            'judul'         => 'Input Umkm',
+            'menu'          => 'umkm',
+            'page'          => 'umkm/v_input',
+            'web'           => $this->ModelSetting->Dataweb(),
+            'provinsi'      => $this->ModelUmkm->allProvinsi(),
+            'wilayah'       => $this->ModelWilayah->AllData(),
+            'kategori_umkm' => $this->ModelKategoriumkm->AllData(), // <-- TAMBAHKAN BARIS INI
         ];
         return view('v_template_back_end', $data);
     }
@@ -61,7 +61,12 @@ class UMKM extends BaseController
                 'rules'  => 'required',
                 'errors' => ['required' => '{field} Wajib Diisi !!']
             ],
-            'id_skala_usaha' => [
+            'id_kategori_umkm' => [
+                'label'  => 'Kategori UMKM',
+                'rules'  => 'required',
+                'errors' => ['required' => '{field} Wajib Diisi !!']
+            ],
+            'skala_usaha' => [
                 'label'  => 'Skala Usaha',
                 'rules'  => 'required',
                 'errors' => ['required' => '{field} Wajib Diisi !!']
@@ -115,10 +120,9 @@ class UMKM extends BaseController
             $nama_file_foto = $foto->getRandomName();
 
             $data = [
-                'id_umkm'          => $id_umkm,
                 'nama_umkm'        => $this->request->getPost('nama_umkm'),
                 'id_kategori_umkm' => $this->request->getPost('id_kategori_umkm'),
-                'skala_usaha'      => $this->request->getPost('id_skala_usaha'),    
+                'skala_usaha'      => $this->request->getPost('skala_usaha'),    
                 'status'           => $this->request->getPost('status'),
                 'coordinat'        => $this->request->getPost('coordinat'),
                 'id_provinsi'      => $this->request->getPost('id_provinsi'),
@@ -136,11 +140,11 @@ class UMKM extends BaseController
             return redirect()->to(base_url('Umkm'));
 
         } else { 
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->to(base_url('Umkm/Input'))->withInput();
+            // Menggunakan cara bawaan CI4 yang otomatis aman dari file serialization
+            return redirect()->to(base_url('Umkm/Input'))->withInput(); 
         }
     }
-
+        
     public function Edit($id_umkm)
     {
         $data = [
@@ -160,14 +164,18 @@ class UMKM extends BaseController
 
     public function UpdateData($id_umkm)
     {
-        // 1. JALANKAN VALIDASI (Menggunakan permit_empty agar foto TIDAK WAJIB saat edit)
         if ($this->validate([
             'nama_umkm' => [
                 'label'  => 'Nama Umkm',
                 'rules'  => 'required',
                 'errors' => ['required' => '{field} Wajib Diisi !!']
             ],
-            'id_skala_usaha' => [
+            'id_kategori_umkm' => [
+                'label'  => 'Kategori UMKM',
+                'rules'  => 'required',
+                'errors' => ['required' => '{field} Wajib Diisi !!']
+            ],
+            'skala_usaha' => [ 
                 'label'  => 'Skala Usaha',
                 'rules'  => 'required',
                 'errors' => ['required' => '{field} Wajib Diisi !!']
@@ -219,7 +227,6 @@ class UMKM extends BaseController
             $umkm = $this->ModelUmkm->DetailData($id_umkm);
             $foto = $this->request->getFile('foto');
 
-            // Cek kondisi file upload
             if ($foto->getError() == 4) {
                 $nama_file_foto = $umkm['foto'];
             } else {
@@ -230,12 +237,11 @@ class UMKM extends BaseController
                 $foto->move('foto', $nama_file_foto);
             }
 
-            // SUSUN VARIABEL DATA (id_sekolah dibuang, dicocokkan ke database terbaru)
             $data = [
                 'id_umkm'          => $id_umkm,
                 'nama_umkm'        => $this->request->getPost('nama_umkm'),
                 'id_kategori_umkm' => $this->request->getPost('id_kategori_umkm'),
-                'skala_usaha'   => $this->request->getPost('id_skala_usaha'),
+                'skala_usaha'      => $this->request->getPost('skala_usaha'), 
                 'status'           => $this->request->getPost('status'),
                 'coordinat'        => $this->request->getPost('coordinat'),
                 'id_provinsi'      => $this->request->getPost('id_provinsi'),
@@ -246,13 +252,11 @@ class UMKM extends BaseController
                 'foto'             => $nama_file_foto,
             ];
             
-            // Eksekusi update data ke model
             $this->ModelUmkm->UpdateData($data);
             session()->setFlashdata('insert', 'Data Berhasil Diupdate!!');
             return redirect()->to(base_url('Umkm'));
 
         } else { 
-            // JIKA VALIDASI GAGAL -> Kirim session 'validation' agar dibaca oleh View Anda
             session()->setFlashdata('validation', \Config\Services::validation());
             return redirect()->to(base_url('Umkm/Edit/' . $id_umkm))->withInput();
         }
