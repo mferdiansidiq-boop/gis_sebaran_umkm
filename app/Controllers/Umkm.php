@@ -48,7 +48,8 @@ class UMKM extends BaseController
             'web'           => $this->ModelSetting->Dataweb(),
             'provinsi'      => $this->ModelUmkm->allProvinsi(),
             'wilayah'       => $this->ModelWilayah->AllData(),
-            'kategori_umkm' => $this->ModelKategoriumkm->AllData(), // <-- TAMBAHKAN BARIS INI
+            'kategori_umkm' => $this->ModelKategoriumkm->AllData(), 
+            'skala_usaha'   => $this->ModelSkalausaha->AllData(),
         ];
         return view('v_template_back_end', $data);
     }
@@ -108,11 +109,12 @@ class UMKM extends BaseController
             ],
             'foto' => [
                 'label'  => 'Foto Umkm',
-                'rules'  => 'uploaded[foto]|max_size[foto,1024]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                // PERBAIKAN: Dinaikkan ke 5MB (5120) dan menghapus mime_in supaya semua ekstensi foto HP lolos
+                'rules'  => 'uploaded[foto]|max_size[foto,5120]|is_image[foto]',
                 'errors' => [
                     'uploaded' => '{field} Wajib Diupload !!',
-                    'max_size' => 'Ukuran {field} max 1024 kb !!',
-                    'mime_in'  => 'Format {field} Harus JPG, JPEG, PNG !!',
+                    'max_size' => 'Ukuran {field} maksimal 5 MB !!',
+                    'is_image' => 'File yang diupload harus berupa Gambar/Foto !!',
                 ]
             ],
         ])) { 
@@ -140,7 +142,8 @@ class UMKM extends BaseController
             return redirect()->to(base_url('Umkm'));
 
         } else { 
-            // Menggunakan cara bawaan CI4 yang otomatis aman dari file serialization
+            // Otomatis melempar error validasi bawaan ke halaman input agar terbaca filter pengintip error kita
+            session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
             return redirect()->to(base_url('Umkm/Input'))->withInput(); 
         }
     }
@@ -217,10 +220,11 @@ class UMKM extends BaseController
             ],
             'foto' => [
                 'label'  => 'Foto Umkm',
-                'rules'  => 'permit_empty|max_size[foto,1024]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                // PERBAIKAN: Disamakan kelonggarannya dengan sistem Insert di atas
+                'rules'  => 'permit_empty|max_size[foto,5120]|is_image[foto]',
                 'errors' => [
-                    'max_size' => 'Ukuran {field} max 1024 kb !!',
-                    'mime_in'  => 'Format {field} Harus JPG, JPEG, PNG !!',
+                    'max_size' => 'Ukuran {field} maksimal 5 MB !!',
+                    'is_image' => 'File yang diupload harus berupa Gambar/Foto !!',
                 ]
             ],
         ])) { 
@@ -257,18 +261,15 @@ class UMKM extends BaseController
             return redirect()->to(base_url('Umkm'));
 
         } else { 
-            session()->setFlashdata('validation', \Config\Services::validation());
+            session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
             return redirect()->to(base_url('Umkm/Edit/' . $id_umkm))->withInput();
         }
     }
 
-
-    //delete
     public function Delete($id_umkm)
     {
-        //delete foto
         $umkm = $this->ModelUmkm->DetailData($id_umkm);
-        if ($umkm['foto'] != "") {
+        if (!empty($umkm['foto']) && file_exists('foto/' . $umkm['foto'])) {
             unlink('foto/' . $umkm['foto']);
         }
         $data = [
@@ -280,28 +281,27 @@ class UMKM extends BaseController
     }
 
     public function Detail($id_umkm)
-{
-    $db = \Config\Database::connect();
-    
-    // Menghubungkan 'id_skala_usaha' milik tbl_skala_usaha dengan kolom 'skala_usaha' milik tbl_umkm
-    $umkm = $db->table('tbl_umkm')
-        ->join('tbl_skala_usaha', 'tbl_skala_usaha.id_skala_usaha = tbl_umkm.skala_usaha', 'left')
-        ->join('tbl_kategori_umkm', 'tbl_kategori_umkm.id_kategori_umkm = tbl_umkm.id_kategori_umkm', 'left')
-        ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_umkm.id_kecamatan', 'left')
-        ->join('tbl_kabupaten', 'tbl_kabupaten.id_kabupaten = tbl_umkm.id_kabupaten', 'left')
-        ->join('tbl_wilayah', 'tbl_wilayah.id_wilayah = tbl_umkm.id_wilayah', 'left')
-        ->where('tbl_umkm.id_umkm', $id_umkm)
-        ->get()->getRowArray();
+    {
+        $db = \Config\Database::connect();
+        
+        $umkm = $db->table('tbl_umkm')
+            ->join('tbl_skala_usaha', 'tbl_skala_usaha.id_skala_usaha = tbl_umkm.skala_usaha', 'left')
+            ->join('tbl_kategori_umkm', 'tbl_kategori_umkm.id_kategori_umkm = tbl_umkm.id_kategori_umkm', 'left')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_umkm.id_kecamatan', 'left')
+            ->join('tbl_kabupaten', 'tbl_kabupaten.id_kabupaten = tbl_umkm.id_kabupaten', 'left')
+            ->join('tbl_wilayah', 'tbl_wilayah.id_wilayah = tbl_umkm.id_wilayah', 'left')
+            ->where('tbl_umkm.id_umkm', $id_umkm)
+            ->get()->getRowArray();
 
-    $data = [
-        'judul' => 'Detail Umkm',
-        'menu'  => 'umkm',
-        'page'  => 'umkm/v_detail',
-        'web'   => $this->ModelSetting->Dataweb(),
-        'umkm'  => $umkm, 
-    ];
-    return view('v_template_back_end', $data);
-}
+        $data = [
+            'judul' => 'Detail Umkm',
+            'menu'  => 'umkm',
+            'page'  => 'umkm/v_detail',
+            'web'   => $this->ModelSetting->Dataweb(),
+            'umkm'  => $umkm, 
+        ];
+        return view('v_template_back_end', $data);
+    }
 
     public function Kabupaten()
     {

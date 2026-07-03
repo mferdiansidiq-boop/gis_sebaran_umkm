@@ -28,13 +28,16 @@
                     </div>
                 </div>
 
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <label>Skala Usaha</label>
-                        <input name="skala_usaha" value="<?= old('skala_usaha') ?>" placeholder="Skala Usaha" class="form-control">
-                        <p class="text-danger"><?= $validation->getError('skala_usaha') ?></p>
-                    </div>
-                </div>
+                <div class="form-group">
+    <label>Skala Usaha</label>
+    <select name="skala_usaha" class="form-control" required>
+        <option value="">--Pilih Skala Usaha--</option>
+        <?php foreach ($skala_usaha as $key => $value) { ?>
+            <!-- value diisi ID angka (1, 2, 3) tapi yang tampil di layar adalah teksnya (Mikro, Kecil, Menengah) -->
+            <option value="<?= $value['id_skala_usaha'] ?>"><?= $value['skala_usaha'] ?></option>
+        <?php } ?>
+    </select>
+</div>
 
                 <div class="col-sm-2">
                     <div class="form-group">
@@ -134,7 +137,7 @@
 
             <div class="form-group">
                 <label>Foto Umkm</label>
-                <input type="file" accept=".jpg,.jpeg,.png" name="foto" class="form-control">
+                <input type="file" accept=".jpg,.jpeg,.png" name="foto" class="form-control" required>
                 <p class="text-danger"><?= $validation->getError('foto') ?></p>
             </div>
 

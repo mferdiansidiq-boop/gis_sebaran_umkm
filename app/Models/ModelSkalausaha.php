@@ -17,24 +17,24 @@ class ModelSkalausaha extends Model
         return $this->db->table('tbl_skala_usaha')->insert($data);
    }
 
-   public function DetailData($id_skala)
+   public function DetailData($id_skala_usaha)
    {
        return $this->db->table('tbl_skala_usaha')
-       ->where('id_skala',$id_skala)
+       ->where('id_skala_usaha',$id_skala_usaha)
        ->get()->getRowArray();
    }
 
    public function UpdateData($data)
    {
        $this->db->table('tbl_skala_usaha')
-             ->where('id_skala', $data['id_skala'])
+             ->where('id_skala_usaha', $data['id_skala_usaha'])
              ->update($data);
    }
 
    public function DeleteData($data)
    {
        $this->db->table('tbl_skala_usaha')
-             ->where('id_skala', $data['id_skala'])
+             ->where('id_skala_usaha', $data['id_skala_usaha'])
              ->delete($data);
    }
 

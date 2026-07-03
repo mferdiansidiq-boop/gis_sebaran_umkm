@@ -66,7 +66,7 @@
                         <td><?= $no++ ?></td>
                         <td><?= $value['nama_umkm'] ?></td>
                         <td class="text-center"><?= $value['status'] ?></td>
-                        <td class="text-center"><?= $value['skala_usaha'] ?></td>
+                        <td class="text-center"><?= $value['nama_skala'] ?></td>
                         <td><?= $value['alamat'] ?></td>
                         <td class="text-center"><img src="<?= base_url('foto/' . $value['foto']) ?>" width="150px"height="100px"></td>
                         <td class="text-center">
