@@ -114,6 +114,20 @@ $routes->group('Umkm', static function ($routes) {
 
 
 
+// Otomatis mendaftarkan semua sub-URL di dalam controller User (Huruf Kecil)
+$routes->group('user', static function ($routes) {
+    $routes->add('/', 'User::index');
+    $routes->add('(:any)', 'User::$1');
+});
+
+// Duplikat group untuk mengantisipasi pemanggilan dengan huruf kapital 'User'
+$routes->group('User', static function ($routes) {
+    $routes->add('/', 'User::index');
+    $routes->add('(:any)', 'User::$1');
+});
+
+
+
 
 /*
 $routes->get('feedback', 'Feedback::index');
