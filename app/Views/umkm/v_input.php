@@ -2,6 +2,7 @@
 <?php /** @var array $wilayah */ ?>
 <?php /** @var array $provinsi */ ?>
 <?php /** @var array $web */ ?>
+<?php /** @var array $kategori_umkm*/ ?>
 
 <div class="col-md-12">
     <div class="card card-outline card-primary">

@@ -98,6 +98,23 @@ $routes->get('Umkm/Delete/(:num)', 'Umkm::Delete/$1');
 
 
 
+
+
+// Otomatis mendaftarkan semua sub-URL di dalam controller UMKM
+$routes->group('umkm', static function ($routes) {
+    $routes->add('/', 'UMKM::index');
+    $routes->add('(:any)', 'UMKM::$1');
+});
+
+// Duplikat group untuk mengantisipasi jika ada pemanggilan dengan huruf kapital 'Umkm'
+$routes->group('Umkm', static function ($routes) {
+    $routes->add('/', 'UMKM::index');
+    $routes->add('(:any)', 'UMKM::$1');
+});
+
+
+
+
 /*
 $routes->get('feedback', 'Feedback::index');
 $routes->post('feedback/store', 'FeedbackPublic::store');

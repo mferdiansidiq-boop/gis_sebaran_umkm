@@ -262,6 +262,47 @@ class UMKM extends BaseController
         }
     }
 
+
+    //delete
+    public function Delete($id_umkm)
+    {
+        //delete foto
+        $umkm = $this->ModelUmkm->DetailData($id_umkm);
+        if ($umkm['foto'] != "") {
+            unlink('foto/' . $umkm['foto']);
+        }
+        $data = [
+            'id_umkm' => $id_umkm,
+        ];
+        $this->ModelUmkm->DeleteData($data);
+        session()->setFlashdata('delete', 'Data Berhasil Dihapus!!');
+        return redirect()->to(base_url('Umkm'));
+    }
+
+    public function Detail($id_umkm)
+{
+    $db = \Config\Database::connect();
+    
+    // Menghubungkan 'id_skala_usaha' milik tbl_skala_usaha dengan kolom 'skala_usaha' milik tbl_umkm
+    $umkm = $db->table('tbl_umkm')
+        ->join('tbl_skala_usaha', 'tbl_skala_usaha.id_skala_usaha = tbl_umkm.skala_usaha', 'left')
+        ->join('tbl_kategori_umkm', 'tbl_kategori_umkm.id_kategori_umkm = tbl_umkm.id_kategori_umkm', 'left')
+        ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan = tbl_umkm.id_kecamatan', 'left')
+        ->join('tbl_kabupaten', 'tbl_kabupaten.id_kabupaten = tbl_umkm.id_kabupaten', 'left')
+        ->join('tbl_wilayah', 'tbl_wilayah.id_wilayah = tbl_umkm.id_wilayah', 'left')
+        ->where('tbl_umkm.id_umkm', $id_umkm)
+        ->get()->getRowArray();
+
+    $data = [
+        'judul' => 'Detail Umkm',
+        'menu'  => 'umkm',
+        'page'  => 'umkm/v_detail',
+        'web'   => $this->ModelSetting->Dataweb(),
+        'umkm'  => $umkm, 
+    ];
+    return view('v_template_back_end', $data);
+}
+
     public function Kabupaten()
     {
         $id_provinsi = $this->request->getPost('id_provinsi');
