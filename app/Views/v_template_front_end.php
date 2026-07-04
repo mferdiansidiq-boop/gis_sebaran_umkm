@@ -2,6 +2,9 @@
 <?php /** @var string $judul */ ?>
 <?php /** @var string $page */ ?>
 <?php /** @var string $menu */ ?>
+<?php /** @var array $wilayah */ ?>
+<?php /** @var array $kategori */ ?>
+
 <html lang="en">
 <head>
   <meta charset="utf-8">

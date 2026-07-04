@@ -109,6 +109,8 @@ $routes->get('wilayah/(:num)', 'Home::wilayah/$1');
 
 
 
+
+
 // Otomatis mendaftarkan semua sub-URL di dalam controller UMKM
 $routes->group('umkm', static function ($routes) {
     $routes->add('/', 'UMKM::index');

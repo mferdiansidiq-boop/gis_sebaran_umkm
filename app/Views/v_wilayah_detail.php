@@ -1,3 +1,7 @@
+
+ <?php /** @var array $detail_wil */ ?>
+ <?php /** @var array $web */ ?>
+
 <div id="map" style="width: 100%; height: 500px;"></div>
 
 <script>

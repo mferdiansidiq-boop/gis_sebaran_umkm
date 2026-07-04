@@ -1,3 +1,8 @@
+<?php
+ /** @var array $web */
+ /** @var string $judul */
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +32,7 @@
 
 <div class="card login-card p-4">
     <div class="card-body">
-        <h3 class="text-center fw-bold mb-4">LOGIN SYSTEM</h3>
+        <h3 class="text-center fw-bold mb-4">LOGIN PENGGUNA</h3>
 
         <!-- Notifikasi Error / Gagal Login -->
         <?php if (session()->getFlashdata('pesan')) : ?>

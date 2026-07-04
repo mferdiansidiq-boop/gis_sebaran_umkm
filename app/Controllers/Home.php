@@ -43,4 +43,17 @@ class Home extends BaseController
     ];
     return view('v_template_front_end', $data);
 }
+
+public function kategori($id_kategori)
+    {
+        $data = [
+            'judul'     => 'Data UMKM',
+            'page'      => 'v_kategori_detail',
+            'web'       => $this->ModelSetting->Dataweb(),
+            'wilayah'   => $this->ModelWilayah->AllData(),
+            'kategori'  => $this->ModelKategoriumkm->AllData(),
+            'umkm'      => $this->ModelUmkm->DataByKategori($id_kategori),
+        ];
+        return view('v_template_front_end', $data);
+    }
 }
