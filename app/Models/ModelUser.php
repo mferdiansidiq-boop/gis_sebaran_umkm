@@ -36,5 +36,14 @@ class ModelUser extends Model
         return $this->db->table('tbl_user')
             ->where('id_user', $data['id_user'])
             ->delete($data);
-    }
+    } 
+
+    public function LoginUser($email, $password)
+{
+    return $this->db->table('tbl_user') // sesuaikan dengan nama tabel user Anda
+        ->where([
+            'email'    => $email,
+            'password' => $password, // Berupa SHA1 sesuai inputan saat insert data
+        ])->get()->getRowArray();
+}
 }

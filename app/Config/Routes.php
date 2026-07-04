@@ -95,7 +95,16 @@ $routes->post('Umkm/UpdateData/(:num)', 'Umkm::UpdateData/$1');
 $routes->get('umkm/delete/(:num)', 'Umkm::Delete/$1');
 $routes->get('Umkm/Delete/(:num)', 'Umkm::Delete/$1');
 
+// --- ROUTE UNTUK SISTEM AUTENTIKASI LOGIN ---
+$routes->get('login', 'Auth::Login');
+$routes->post('ceklogin', 'Auth::CekLogin');
+$routes->get('logout', 'Auth::Logout');
 
+$routes->get('dashboard', 'Dashboard::index'); // Mengarah ke Controller Dashboard
+$routes->get('auth/logout', 'Auth::logout');   // Mengarah ke Fungsi Logout di Controller Auth
+$routes->get('Dashboard', 'Dashboard::index');
+
+$routes->get('wilayah/(:num)', 'Home::wilayah/$1');
 
 
 
@@ -125,6 +134,8 @@ $routes->group('User', static function ($routes) {
     $routes->add('/', 'User::index');
     $routes->add('(:any)', 'User::$1');
 });
+
+
 
 
 
