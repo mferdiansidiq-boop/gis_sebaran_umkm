@@ -5,6 +5,7 @@
 
 <script>
 
+
 // LAYER
 var peta1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
 
@@ -57,6 +58,27 @@ L.control.layers(baseMaps).addTo(map);
   .addTo(map);
  <?php } ?>
 
+
+
+
+
+// --- TEMPELKAN KODE INI SETELAH LOOPING WILAYAH ---
+
+<?php if (isset($umkm)) { ?>
+  <?php foreach ($umkm as $key => $u) { ?>
+    <?php 
+      // Memecah string koordinat dari database (format: lat, lng)
+      $coords = explode(',', $u['coordinat']);
+      if(count($coords) == 2) { 
+        $lat = trim($coords[0]);
+        $lng = trim($coords[1]);
+    ?>
+        L.marker([<?= $lat ?>, <?= $lng ?>])
+         .addTo(map)
+         .bindPopup("<b><?= $u['nama_umkm'] ?></b>");
+    <?php } ?>
+  <?php } ?>
+<?php } ?>
 </script> 
 
 

@@ -106,8 +106,14 @@ $routes->get('Dashboard', 'Dashboard::index');
 
 $routes->get('wilayah/(:num)', 'Home::wilayah/$1');
 
+// Tambahkan baris ini ke app/Config/Routes.php
+$routes->get('login', 'Auth::Login');
+$routes->post('auth/CekLogin', 'Auth::CekLogin');
 
+// Tambahkan baris ini untuk mendefinisikan route kategori
+$routes->get('home/kategori/(:num)', 'Home::kategori/$1');
 
+$routes->get('home/kategori/(:num)', 'Home::kategori/$1');
 
 
 

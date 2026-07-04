@@ -73,4 +73,14 @@ class ModelUmkm extends Model
             ->where('id_kabupaten', $id_kabupaten)
             ->get()->getResultArray();
     }
+
+    public function DataByKategori($id_kategori)
+{
+    return $this->db->table('tbl_umkm')
+        ->select('tbl_umkm.*, tbl_skala_usaha.skala_usaha as nama_skala, tbl_kategori_umkm.nama_kategori_umkm')
+        ->join('tbl_skala_usaha', 'tbl_skala_usaha.id_skala_usaha = tbl_umkm.skala_usaha', 'left')
+        ->join('tbl_kategori_umkm', 'tbl_kategori_umkm.id_kategori_umkm = tbl_umkm.id_kategori_umkm', 'left')
+        ->where('tbl_umkm.id_kategori_umkm', $id_kategori)
+        ->get()->getResultArray();
+}
 }
