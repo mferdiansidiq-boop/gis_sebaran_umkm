@@ -148,6 +148,18 @@ $routes->group('User', static function ($routes) {
 
 
 
+// ---------- REST API (read-only, JSON) ----------
+$routes->group('api/v1', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
+    $routes->get('umkm', 'Umkm::index');
+    $routes->get('umkm/geojson', 'Umkm::geojson');
+    $routes->get('umkm/(:num)', 'Umkm::show/$1');
+    $routes->get('wilayah', 'Wilayah::index');
+    $routes->get('wilayah/(:num)', 'Wilayah::show/$1');
+    $routes->get('kategori', 'Referensi::kategori');
+    $routes->get('skala-usaha', 'Referensi::skala');
+    $routes->get('statistik', 'Referensi::statistik');
+});
+
 /*
 $routes->get('feedback', 'Feedback::index');
 $routes->post('feedback/store', 'FeedbackPublic::store');

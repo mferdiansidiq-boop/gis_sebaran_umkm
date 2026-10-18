@@ -51,6 +51,32 @@ class Database extends Config
         ],
     ];
 
+    /**
+     * Koneksi PostgreSQL (dipakai API bila API_DB_GROUP = pgsql di .env).
+     * Nilai bisa ditimpa lewat .env: database.pgsql.hostname, .username, .password, .database, .port
+     */
+    public array $pgsql = [
+        'DSN'        => '',
+        'hostname'   => 'localhost',
+        'username'   => 'postgres',
+        'password'   => '',
+        'database'   => 'db_gis_sebaran_umkm',
+        'schema'     => 'public',
+        'DBDriver'   => 'Postgre',
+        'DBPrefix'   => '',
+        'pConnect'   => false,
+        'DBDebug'    => true,
+        'charset'    => 'utf8',
+        'swapPre'    => '',
+        'failover'   => [],
+        'port'       => 5432,
+        'dateFormat' => [
+            'date'     => 'Y-m-d',
+            'datetime' => 'Y-m-d H:i:s',
+            'time'     => 'H:i:s',
+        ],
+    ];
+
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
